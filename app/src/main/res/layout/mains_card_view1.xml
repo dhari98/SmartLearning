@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="2dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <!--
+                <ImageButton
+                android:id="@+id/imageViewSound"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/sound"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="ContentDescription,SpeakableTextPresentCheck,ImageContrastCheck" />
+            زر الصوت -->
+
+            <!-- زر الإعجاب -->
+            <ImageButton
+                android:id="@+id/imageViewSound"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="1dp"
+                android:scaleType="centerCrop"
+
+                android:background="?android:selectableItemBackgroundBorderless"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/music"
+                tools:ignore="ContentDescription" />
+
+            <ImageButton
+                android:id="@+id/imageViewLike"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginEnd="1dp"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:scaleType="fitCenter"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/like"
+                tools:ignore="ContentDescription" />
+
+
+
+
+            <!-- النص الأول -->
+            <TextView
+                android:id="@+id/textViewWorld"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/text1"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/imageViewSound"
+                app:layout_constraintEnd_toStartOf="@id/imageViewLike"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/decorativeLine"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+
+            <View
+                android:id="@+id/decorativeLine"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/decorative_line"
+                app:layout_constraintStart_toEndOf="@id/imageViewSound"
+                app:layout_constraintEnd_toStartOf="@id/imageViewLike"
+                app:layout_constraintTop_toBottomOf="@id/textViewWorld"
+                app:layout_constraintBottom_toTopOf="@id/textViewWorld2"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
+            <!-- النص الثاني -->
+            <TextView
+                android:id="@+id/textViewWorld2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/text2"
+                android:textAlignment="center"
+                android:textColor="#C9D32F2F"
+
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/imageViewSound"
+                app:layout_constraintEnd_toStartOf="@id/imageViewLike"
+                app:layout_constraintTop_toBottomOf="@id/decorativeLine"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

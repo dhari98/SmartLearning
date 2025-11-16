@@ -1,0 +1,16 @@
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="background_color">#FFFFFF</color> <!-- خلفية بيضاء -->
+
+    <color name="button_sample">#FDE400</color>
+    <color name="button_sample2">#FDBF07</color>
+    <color name="button_sample_click">#E9D393</color>
+
+    <color name="custom_bar">#C3A014</color>
+    <color name="colorPrimary2">#9E810A</color>
+    <color name="colorPrimaryVariant2">#A60912</color>
+
+    <color name="text">#038649</color>
+    <color name="favoTextColor">#FDE400</color>
+</resources>
