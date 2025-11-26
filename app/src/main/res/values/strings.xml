@@ -81,7 +81,6 @@
     <string name="compound_letters">ألحروف المركبة</string>
 
 
-
     <!-- A1 MainActivitis -->
     <string name="level_a1">المستوى الاول</string>
     <string name="level_a2">المستوى الثاني</string>
@@ -109,10 +108,54 @@
     <string name="ad_label">إعلان</string>
 
 
+    <!-- ResultActivity Texts -->
+    <!-- نصوص شاشة نتيجةى الاختبارات -->
+    <string name="score_text">نتيجة اختبارك %1$d من %2$d</string>
+    <string name="quiz2">TextView</string>
+    <string name="qqqq">النتيجة</string>
+    <string name="qqqqqqq">image</string>
+    <string name="qqqqqqqqqq">اختبر نفسك باستمرار ليساعدك بسرعة الحفظ</string>
+    <string name="qqqqqqqqqqqq">العودة الى الصفحة الرئيسية</string>
+    <string name="quiz_image">Quiz Image</string>
+    <string name="qq">السؤال</string>
+    <string name="kkk">العودة الى الصفحة الرئيسية</string>
+    <string name="ookkkkkk">اختبر نفسك دوماً وباستمرار</string>
+    <string name="ookkkkkk2">حتى تستطيع حفظ المزيد من الكلمات</string>
+
+    <!-- Test words -->
+    <!-- كلمات الاختبار -->
+    <string name="q2_qworld">ما معنى كلمة</string>
+    <string name="audio_instruction">اضغط على زر تشغيل الصوت ثم اختر الإجابة</string>
+
     <!-- نصوص المفضلة -->
     <!-- Favorite Texts -->
 
     <string name="empty_favorites">قائمة الكلمات المفضلة فارغة</string>
+
+
+    <string name="share_app_text">حَمِل الآن تطبيق تعليم اللغة الألمانية\nhttps://play.google.com/store/apps/details?id=%1$s</string>
+
+
+    <!-- App_About -->
+    <!-- حول التطبيق -->
+    <string name="designabout">تم إعداد وتَصميم وبرمجة هذا التطبيق من قِبَل</string>
+    <string name="progname">المُبرمج ضاري العنِزي</string>
+    <string name="mesage">TODO</string>
+    <string name="tocommunicate">للتَواصل حول قتراحاتَكم أو مٌلاحظاتكم</string>
+    <string name="sharing">شاركِ التطبيق مع ألأصدقاء</string>
+    <string name="star">TODO</string>
+    <string name="evaluate">قيّم التطبيق</string>
+    <string name="textview">الإصدار: </string>
+    <!-- Test words -->
+    <!-- كلمات الاختبار -->
+
+    <string name="last_question">السؤال الأخير</string>
+    <string name="submit_answer">تثبيت الجواب</string>
+    <string name="select_answer_first">اختار الاجابة أولاً</string>
+    <string name="wrong_answer">الجواب خطأ</string>
+    <string name="correct_answer">الجواب صح</string>
+    <string name="quiz_result">نتيجة الاختبار</string>
+    <string name="next_question">السؤال الآخر</string>
 
 
     <!-- Fragment1a1 Deutsches Alphabet -->
@@ -197,6 +240,38 @@
 
     <string name="z_example">Z / z</string>
     <string name="z_word">Zebra\nحمار وحشي</string>
+
+
+    <string name="personal_pronoun">PersonalPronomen</string>
+    <string name="personal_pronoun_ar">الضمائر الشخصيه</string>
+    <string name="ich">Ich</string>
+    <string name="ich_ar">أنا</string>
+    <string name="du">Du</string>
+    <string name="du_ar">أنتَ/أنتِ\n(للمفرد)</string>
+    <string name="er">Er</string>
+    <string name="er_ar">هو</string>
+    <string name="sie">sie</string>
+    <string name="sie_ar">هي</string>
+    <string name="es">Es</string>
+    <string name="es_ar">هو/هي\n(لغير العاقل+الحيادي)</string>
+    <string name="wir">Wir</string>
+    <string name="wir_ar">نحن</string>
+    <string name="ihr">Ihr</string>
+    <string name="ihr_ar">أنتم</string>
+    <string name="sie_polite">Sie</string>
+    <string name="sie_polite_ar">هم / حضرتك\n(للكل بصيغة الاحترام)</string>
+    <string name="dieser">Dieser</string>
+    <string name="dieser_ar">هذا\n(مذكر)</string>
+    <string name="diese">Diese</string>
+    <string name="diese_ar">هذه\n(مؤنث/جمع)</string>
+    <string name="dieses">Dieses</string>
+    <string name="dieses_ar">هذا\n(محايد)</string>
+    <string name="jener">Jener</string>
+    <string name="jener_ar">ذلك\n(مذكر)</string>
+    <string name="jene">Jene</string>
+    <string name="jene_ar">تلك\n(مؤنث / جمع)</string>
+    <string name="jenes">Jenes</string>
+    <string name="jenes_ar">ذلك\n(محايد)</string>
 
 
     <string name="added_to_favorites">تمت الإضافة إلى قائمة المفضلة</string>

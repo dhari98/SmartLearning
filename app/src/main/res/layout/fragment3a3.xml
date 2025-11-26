@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment3a3"
+    android:background="?android:colorBackground"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        tools:layout="@layout/fragment_fragment3a3">
+
+        <!-- سؤال الكويز -->
+
+        <!-- زر الصورة -->
+        <TextView
+            android:id="@+id/tv_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="@string/audio_instruction"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            tools:ignore="SpUsage,TextSizeCheck"
+            tools:text="Apple" />
+
+        <ImageButton
+            android:id="@+id/iv_image"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:layout_below="@id/tv_question"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/button_sample"
+            android:contentDescription="@string/quiz_image"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sound"
+            tools:ignore="ImageContrastCheck" />
+
+        <!-- خيارات الإجابة -->
+        <GridLayout
+            android:id="@+id/GridLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_image"
+            android:layout_marginTop="15dp"
+            android:columnCount="2"
+            android:rowCount="2"
+            android:gravity="center"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/tv_option_one"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:textStyle="bold"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_sample"
+                android:foreground="@drawable/effect"
+                android:gravity="center"
+                android:textSize="16sp"
+                tools:text="Apple" />
+
+            <TextView
+                android:id="@+id/tv_option_two"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:textStyle="bold"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_sample"
+                android:foreground="@drawable/effect"
+                android:gravity="center"
+                android:textSize="16sp"
+                tools:text="Apple" />
+
+            <TextView
+                android:id="@+id/tv_option_three"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:textStyle="bold"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_sample"
+                android:foreground="@drawable/effect"
+                android:gravity="center"
+                android:textSize="16sp"
+                tools:text="Apple" />
+
+            <TextView
+                android:id="@+id/tv_option_four"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:textStyle="bold"
+
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_sample"
+                android:foreground="@drawable/effect"
+                android:gravity="center"
+                android:textSize="16sp"
+                tools:text="Apple" />
+        </GridLayout>
+
+        <!-- زر الإرسال -->
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/GridLayout1"
+            app:backgroundTint="@null"
+
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_sample2"
+            android:foreground="@drawable/effect"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:ignore="SpeakableTextPresentCheck,VisualLintButtonSize" />
+
+        <!-- إعلان AdMob -->
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_submit"
+            android:layout_marginTop="20dp"
+            app:adSize="SMART_BANNER"
+            app:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
+    </RelativeLayout>
+</ScrollView>

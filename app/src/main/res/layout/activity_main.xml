@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
+
+
     android:id="@+id/drawer_layout"
     tools:context="MainActivity">
 
@@ -31,15 +33,15 @@
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/imageView1212"
-                android:layout_width="150dp"
-                android:layout_height="125dp"
-
-                android:layout_marginBottom="5dp"
+                android:layout_width="170dp"
+                android:layout_height="135dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="75dp"
-                app:srcCompat="@drawable/about"
-                tools:ignore="SpeakableTextPresentCheck" />
-
+                android:layout_marginBottom="5dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:clipToPadding="false"
+                android:clipChildren="false"/>
 
 
             <androidx.recyclerview.widget.RecyclerView

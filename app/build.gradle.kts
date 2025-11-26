@@ -34,6 +34,9 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    viewBinding {
+        enable = true
+    }
 }
 dependencies {
 
@@ -70,6 +73,9 @@ dependencies {
 
 
     implementation(libs.play.services.auth)
+
+
+    implementation("com.airbnb.android:lottie:6.7.1")
 
 
 }

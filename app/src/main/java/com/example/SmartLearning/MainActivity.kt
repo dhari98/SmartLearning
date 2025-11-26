@@ -31,14 +31,11 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.navigation.NavigationView
-import java.util.Locale
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Locale
 
 @Suppress("NAME_SHADOWING")
 class MainActivity : AppCompatActivity() {
@@ -83,7 +80,7 @@ class MainActivity : AppCompatActivity() {
     // 🔸 Load Interstitial Ad
     private fun loadInterstitialAd() {
         val adRequest = AdRequest.Builder().build()
-        InterstitialAd.load(this, "ca-app-pub-3940256099942544/1033173712", adRequest,
+        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(ad: InterstitialAd) {
                     mInterstitialAd = ad
@@ -101,15 +98,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        // العرض حتى الحافة
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-
-        // التعامل مع الحواف
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainLayout)) { view, windowInsets ->
-            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-            view.setPadding(insets.left, insets.top, insets.right, insets.bottom)
-            WindowInsetsCompat.CONSUMED
-        }
 
 
 
@@ -239,7 +227,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.itemsharapp -> {
                     val intent = Intent().apply {
                         action = Intent.ACTION_SEND
-                    //    putExtra(Intent.EXTRA_TEXT, getString(R.string.share_app_text, packageName))
+                        putExtra(Intent.EXTRA_TEXT, getString(R.string.share_app_text, packageName))
                         type = "text/plain"
                     }
                     startActivity(Intent.createChooser(intent, "Share To:"))
@@ -247,8 +235,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.aboutapp -> {
-                //    val intent = Intent(this, AppAbout::class.java)
-                //    startActivity(intent)
+                    val intent = Intent(this, AppAbout::class.java)
+                    startActivity(intent)
                     true
                 }
 

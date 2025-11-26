@@ -74,21 +74,41 @@ class TabsActivity : AppCompatActivity() {
         return when (type) {
 
             "GROUP1" -> Pair(
-                listOf(Fragment1a1(), Fragment1a1(),Fragment1a1()),
-                listOf(context.getString(R.string.Grammar), context.getString(R.string.Readingandlistening),))
+                listOf(
+                    Fragment1a1(),
+                    Fragment1a1(),
+                    Fragment1a1()
+                ),
+                listOf(
+                    context.getString(R.string.Grammar),
+                    context.getString(R.string.Readingandlistening),
+                    context.getString(R.string.words)   // ➕ تمت إضافة عنوان ثالث
+                )
+            )
 
             "GROUPNEVA1" -> Pair(
-                listOf(FragmentGrammarA1(), FragmentGrammarA1()),
-                listOf(context.getString(R.string.Grammar), context.getString(R.string.Readingandlistening),))
-
+                listOf(
+                    FragmentGrammarA1(),
+                    FragmentGrammarA1()
+                ),
+                listOf(
+                    context.getString(R.string.Grammar),
+                    context.getString(R.string.Readingandlistening)
+                )
+            )
 
             "GROUP3" -> Pair(
-                listOf(Fragment1a1(), Fragment1a1(), Fragment1a1()),
+                listOf(
+                    Fragment3a1(),
+                    Fragment3a2(),
+                    Fragment3a3()
+                ),
                 listOf(
                     context.getString(R.string.words),
                     context.getString(R.string.word_test),
-                    context.getString(R.string.audio_test)))
-
+                    context.getString(R.string.audio_test)
+                )
+            )
 
             else -> Pair(emptyList(), emptyList())
         }

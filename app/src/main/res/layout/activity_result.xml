@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="35dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#FFF8E1"
+        tools:ignore="ScrollViewSize">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            android:gravity="center_horizontal"
+            android:padding="40dp">
+
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="25dp"
+
+                android:text="@string/score_text"
+                android:textColor="#D32F2F"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                tools:ignore="SpUsage,TextSizeCheck" />
+
+            <ImageView
+                android:id="@+id/tv_trophy"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/focus"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_congratulations"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/ookkkkkk"
+                android:textColor="#212121"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                tools:ignore="SpUsage,TextSizeCheck" />
+
+            <TextView
+                android:id="@+id/tv_congratulations2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/ookkkkkk2"
+                android:textColor="#424242"
+                android:textSize="18dp"
+                tools:ignore="SpUsage,TextSizeCheck" />
+
+            <Button
+                android:id="@+id/btn_finish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#FBC02D"
+                android:text="@string/kkk"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                tools:ignore="SpUsage,VisualLintButtonSize,TextSizeCheck" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</ScrollView>

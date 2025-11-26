@@ -33,7 +33,7 @@ class MainActivityAdapter(private val onClickListener: OnClickListener) :
         val newList = mutableListOf<DataMainActivity>()
 
         // نسخ الـ IDs التي نريد أن نضيف تحتها إعلان
-        val adUnderIds = setOf(18, 36,54)
+        val adUnderIds = setOf(3, 9)
 
         for (item in dataList) {
             newList.add(item)

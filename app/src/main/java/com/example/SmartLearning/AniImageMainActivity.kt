@@ -12,13 +12,24 @@ import androidx.viewpager.widget.ViewPager
 class AniImageMainActivity(private val context: Context, private val photos: List<Int>) : PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val viewPager = container as ViewPager
         val imageView = ImageView(context)
         imageView.setImageResource(photos[position])
-        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-        viewPager.addView(imageView)
+
+        // ✨ أهم سطرين
+        imageView.scaleType = ImageView.ScaleType.FIT_CENTER
+        imageView.adjustViewBounds = true
+
+        // نفس مقاسات الـ ViewPager
+        val params = ViewGroup.LayoutParams(
+            170.dp(context),   // width
+            135.dp(context)    // height
+        )
+        imageView.layoutParams = params
+
+        container.addView(imageView)
         return imageView
     }
+
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         val viewPager = container as ViewPager
@@ -33,4 +44,8 @@ class AniImageMainActivity(private val context: Context, private val photos: Lis
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`
     }
+
+    fun Int.dp(context: Context): Int =
+        (this * context.resources.displayMetrics.density).toInt()
+
 }

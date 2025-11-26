@@ -28,7 +28,7 @@ class Fragment1a1 : Fragment() {
     private lateinit var textToSpeech: TextToSpeech
     private var nativeAd: NativeAd? = null
 
-    private val nativeAdUnitId = "ca-app-pub-2017447968949849/5488886932"
+    private val nativeAdUnitId = "ca-app-pub-3940256099942544/2247696110"
 
     // Adapter متغير ليتم تحديثه لاحقاً
     private lateinit var adapter: MainsAdapter
