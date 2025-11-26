@@ -3,19 +3,37 @@
 package com.example.SmartLearning
 
 import android.content.Context
-import com.example.SmartLearning.Question2
-
-
+/**
+ * AudioQuizzes
+ * Responsible for generating audio-based quiz questions.
+ * Each Question2 object contains:
+ *  - id
+ *  - question instruction
+ *  - four answer options
+ *  - correct option index
+ */
 object AudioQuizzes {
 
-
+    // Key used to send the number of total questions to ResultActivity
     const val TOTAL_QUESTION: String = "TOTAL_QUESTIONS"
+
+    // Key used to send the total correct answers to ResultActivity
     const val CORRECT_ANSWERS: String = "TOTAL_SCORE"
 
+
+    /**
+     * AudioQuestion3()
+     * Generates a shuffled list of Question2 objects for the audio quiz level.
+     * @param context — required to access string resources.
+     * @return ArrayList<Question2> — randomized questions for the quiz.
+     */
+    @Suppress("FunctionName")
     fun AudioQuestion3(context: Context): ArrayList<Question2> {
 
         val questionsList = ArrayList<Question2>()
 
+        // ✨ Each question takes:
+        // (id, question text, option1, option2, option3, option4, correctAnswerIndex)
         questionsList.add(
             Question2(
                 1, context.getString(R.string.audio_instruction),
@@ -112,7 +130,7 @@ object AudioQuizzes {
             )
         )
 
+        // ✨ Randomize the question order before returning
         return questionsList.shuffled() as ArrayList<Question2>
-
     }
 }

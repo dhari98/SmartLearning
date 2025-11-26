@@ -36,27 +36,26 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Locale
-
 @Suppress("NAME_SHADOWING")
 class MainActivity : AppCompatActivity() {
 
     // 🔹 UI components
-    private lateinit var viewPager: ViewPager
-    private lateinit var aniImag: AniImageMainActivity
-    private lateinit var handler: Handler
-    private lateinit var runnable: Runnable
+    private lateinit var viewPager: ViewPager        // Slider (image carousel at the top)
+    private lateinit var aniImag: AniImageMainActivity  // Adapter for ViewPager image slider
+    private lateinit var handler: Handler            // Handler to auto-slide ViewPager
+    private lateinit var runnable: Runnable          // Runnable that changes images every delay
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var drawerlayout: DrawerLayout
-    private lateinit var navview: NavigationView
+    private lateinit var recyclerView: RecyclerView  // Main categories list using GridLayout
+    private lateinit var drawerlayout: DrawerLayout  // Navigation drawer main layout
+    private lateinit var navview: NavigationView     // Navigation menu items
 
-    private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var toggle: ActionBarDrawerToggle // Drawer toggle for toolbar menu icon
 
     // 🔹 Ad-related variables
-    private var mInterstitialAd: InterstitialAd? = null
+    private var mInterstitialAd: InterstitialAd? = null   // Interstitial ad (full screen ad)
 
     // 🔹 Other variables
-    private val photos = listOf( // Slider images
+    private val photos = listOf( // Slider images shown in ViewPager
         R.drawable.read,
         R.drawable.writ,
         R.drawable.watch,
@@ -65,27 +64,31 @@ class MainActivity : AppCompatActivity() {
         R.drawable.winner
     )
 
-    private val delayTime: Long = 2000 // ⏳ Delay between photo switches (3 seconds)
+    private val delayTime: Long = 2000 // ⏳ Delay time between slider auto-switch (2 seconds)
 
-    private val tag = "MainActivity" // 🔖 Log tag
-    private var counter = 0 // 🔢 Counter for ads after every 4 clicks
+    private val tag = "MainActivity" // Log tag for debugging
+    private var counter = 0 // 🔢 Counter for clicks to show Interstitial Ad after every 4 clicks
 
-    // 🔹 RecyclerView data
+    // 🔹 Categories list (RecyclerView)
     private lateinit var photoAdapter: MainActivityAdapter
     private var dataList = mutableListOf<DataMainActivity>()
 
-    // 🔹 Tracks opened pages (for example, to update menu titles)
+    // 🔹 Tracks opened pages to avoid showing ad again for repeated access
     private val openedPages = mutableSetOf<String>()
 
-    // 🔸 Load Interstitial Ad
+    // 🔸 Loads Interstitial Ad for later display
     private fun loadInterstitialAd() {
         val adRequest = AdRequest.Builder().build()
-        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest,
+        InterstitialAd.load(
+            this,
+            "ca-app-pub-3940256099942544/1033173712", // Test ad unit
+            adRequest,
             object : InterstitialAdLoadCallback() {
+                // Ad loaded successfully
                 override fun onAdLoaded(ad: InterstitialAd) {
                     mInterstitialAd = ad
                 }
-
+                // If ad fails to load
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     mInterstitialAd = null
                 }
@@ -95,28 +98,24 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main) // Set UI layout
 
-
-
-
-
-        // Initialize UI components
+        // ================== Initialize UI ==================
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         drawerlayout = findViewById(R.id.drawer_layout)
         navview = findViewById(R.id.nav_view)
         recyclerView = findViewById(R.id.recyclerView)
         viewPager = findViewById(R.id.imageView1212)
 
-        navview.itemIconTintList = null // Important: keep icons original color
+        navview.itemIconTintList = null // Keep original colors for menu icons
 
         val menuItem = navview.menu.findItem(R.id.itema1)
-        menuItem.title = getString(R.string.sub_item_1_1)
+        menuItem.title = getString(R.string.sub_item_1_1) // Default title before opening A1 page
 
-        aniImag = AniImageMainActivity(this, photos)
+        aniImag = AniImageMainActivity(this, photos) // Set slider adapter
         viewPager.adapter = aniImag
 
-
+        // Auto-slide handler for ViewPager
         handler = Handler(Looper.getMainLooper())
         runnable = object : Runnable {
             override fun run() {
@@ -126,37 +125,40 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        title = "" // Removes app title from toolbar
 
-        title = ""
+        setSupportActionBar(toolbar) // Set toolbar as ActionBar
 
-        setSupportActionBar(toolbar)
-
+        // Initialize AdMob
         MobileAds.initialize(this) {}
-        loadAds()
+        loadAds() // Load first Interstitial Ad
 
+        // Setup drawer toggle (menu icon animation)
         toggle = ActionBarDrawerToggle(this, drawerlayout, toolbar, R.string.open, R.string.close)
         toggle.isDrawerIndicatorEnabled = true
         drawerlayout.addDrawerListener(toggle)
         toggle.syncState()
 
-
+        // ================== Navigation Drawer Click Handling ==================
         navview.setNavigationItemSelectedListener {
 
             when (it.itemId) {
 
-                R.id.itemfav -> {
-                   val intent = Intent(this, FavoActivity::class.java)
-                   startActivity(intent)
+                R.id.itemfav -> { // Favorites page
+                    val intent = Intent(this, FavoActivity::class.java)
+                    startActivity(intent)
                     true
                 }
-                R.id.germany -> {
-                //    val intent = Intent(this, GermaniActivity::class.java)
-                //    startActivity(intent)
-                    true
-                }
-                R.id.itema1 -> {
-                    val pageKey = "A1"
 
+                R.id.germany -> { // Reserved for future feature (Germany Page)
+                    true
+                }
+
+                // -------- A1 Module with Rewarded Ad Logic ----------
+                R.id.itema1 -> {
+                    val pageKey = "A1" // Unique key to track page open status
+
+                    // If page opened before → open directly with no ad
                     if (openedPages.contains(pageKey)) {
                         val intent = Intent(this, TabsActivity::class.java)
                         intent.putExtra("TYPE", "GROUPNEVA1")
@@ -164,46 +166,43 @@ class MainActivity : AppCompatActivity() {
                         return@setNavigationItemSelectedListener true
                     }
 
+                    // Show confirmation dialog before showing ad
                     val builder = AlertDialog.Builder(this)
                     builder.setTitle(getString(R.string.ad_alert_title))
                     builder.setMessage(getString(R.string.ad_alert_message))
+
                     builder.setPositiveButton(getString(R.string.yes)) { dialog, _ ->
                         if (mInterstitialAd != null) {
+                            // Setup ad callbacks
                             mInterstitialAd?.fullScreenContentCallback =
                                 object : FullScreenContentCallback() {
+
+                                    // When ad closes → open page
                                     override fun onAdDismissedFullScreenContent() {
                                         openedPages.add(pageKey)
-
-                                        // ✅ افتح TabsActivity بدل A1
-                                        val intent =
-                                            Intent(this@MainActivity, TabsActivity::class.java)
+                                        val intent = Intent(this@MainActivity, TabsActivity::class.java)
                                         intent.putExtra("TYPE", "GROUPNEVA1")
                                         startActivity(intent)
-                                        loadInterstitialAd()
-
-                                        // ✅ تحديث عنوان الصفحة في القائمة
-                                        val navView: NavigationView = findViewById(R.id.nav_view)
+                                        loadInterstitialAd() // Reload next ad
+                                        val navView = findViewById<NavigationView>(R.id.nav_view)
                                         val menuItem = navView.menu.findItem(R.id.itema1)
-                                        menuItem.title = getString(R.string.sub_item_1_2)
+                                        menuItem.title = getString(R.string.sub_item_1_2) // Update title after first open
                                     }
                                     override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                                        // If ad fails → open page normally
                                         Toast.makeText(this@MainActivity, getString(R.string.ad_failed_to_show), Toast.LENGTH_SHORT).show()
                                         openedPages.add(pageKey)
-                                        // ✅ افتح TabsActivity بدل A1
-                                        val intent =
-                                            Intent(this@MainActivity, TabsActivity::class.java)
+                                        val intent = Intent(this@MainActivity, TabsActivity::class.java)
                                         intent.putExtra("TYPE", "GROUPNEVA1")
                                         startActivity(intent)
                                         loadInterstitialAd()
-
-                                        // ✅ تحديث عنوان الصفحة في القائمة
-                                        val navView: NavigationView = findViewById(R.id.nav_view)
+                                        val navView = findViewById<NavigationView>(R.id.nav_view)
                                         val menuItem = navView.menu.findItem(R.id.itema1)
                                         menuItem.title = getString(R.string.sub_item_1_2)
                                     }
 
                                     override fun onAdShowedFullScreenContent() {
-                                        mInterstitialAd = null
+                                        mInterstitialAd = null // prevent showing same object twice
                                     }
                                 }
                             mInterstitialAd?.show(this)
@@ -217,13 +216,11 @@ class MainActivity : AppCompatActivity() {
                     builder.setNegativeButton(getString(R.string.no)) { dialog, _ ->
                         dialog.dismiss()
                     }
-
                     builder.show()
                     true
                 }
 
-
-
+                // Share app
                 R.id.itemsharapp -> {
                     val intent = Intent().apply {
                         action = Intent.ACTION_SEND
@@ -234,16 +231,16 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
+                // About page
                 R.id.aboutapp -> {
-                    val intent = Intent(this, AppAbout::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this, AppAbout::class.java))
                     true
                 }
 
+                // Rate the app
                 R.id.starts -> {
                     val openURL = Intent(Intent.ACTION_VIEW)
-                    openURL.data =
-                        "https://play.google.com/store/apps/details?id=$packageName".toUri()
+                    openURL.data = "https://play.google.com/store/apps/details?id=$packageName".toUri()
                     startActivity(openURL)
                     true
                 }
@@ -252,43 +249,47 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Apply layout animation to RecyclerView items
         val lac = LayoutAnimationController(AnimationUtils.loadAnimation(this, R.anim.item_anim))
         lac.delay = 0.20f
         lac.order = LayoutAnimationController.ORDER_NORMAL
         recyclerView.layoutAnimation = lac
 
-
+        // Grid layout with dynamic span size depending on item type
         val layoutManager = GridLayoutManager(this, 3)
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return when (photoAdapter.getItemViewType(position)) {
                     MainActivityAdapter.TYPE_AD,
-                    MainActivityAdapter.TYPE_TEXT -> 3 // يأخذ الصف كاملًا
+                    MainActivityAdapter.TYPE_TEXT -> 3 // Full-width row for title or ad
                     else -> 1
                 }
             }
         }
         recyclerView.layoutManager = layoutManager
 
+        // Main click listener for grid items
         photoAdapter = MainActivityAdapter(MainActivityAdapter.OnClickListener { data ->
 
-            // ✅ شرط لمنع عد العناصر العناوين أو الإعلانات
+            // Count only real lesson items (not ads / titles)
             if (data.image != 0 && data.image != null) {
                 counter++
             }
 
+            // Show interstitial ad every 4 clicks
             if (counter == 4) {
                 counter = 0
                 if (mInterstitialAd != null) {
                     mInterstitialAd?.fullScreenContentCallback =
                         object : FullScreenContentCallback() {
+
                             override fun onAdDismissedFullScreenContent() {
                                 launchACtivity(data)
                                 mInterstitialAd = null
                                 loadAds()
                             }
+
                             override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                                Log.d("AdError", adError.message)
                                 launchACtivity(data)
                                 mInterstitialAd = null
                                 loadAds()
@@ -296,7 +297,6 @@ class MainActivity : AppCompatActivity() {
                         }
                     mInterstitialAd?.show(this)
                 } else {
-                    Log.d("launchActivity", "Interstitial ad wasn't ready.")
                     launchACtivity(data)
                     loadAds()
                 }
@@ -308,40 +308,31 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = photoAdapter
         dataList.clear()
         recyclerView.adapter = photoAdapter
-////////////////////////////////////////////////////////////////////////////////////////////////////
-        dataList.add(DataMainActivity(getString(R.string.level_a1), 0, 0))
 
+        ////////////////////////////////////////// Data (Levels & Lessons)
+        dataList.add(DataMainActivity(getString(R.string.level_a1), 0, 0))
         dataList.add(DataMainActivity(getString(R.string.letters_pronunciation), R.drawable.alphabet, 1))
         dataList.add(DataMainActivity(getString(R.string.text_to_speech), R.drawable.texttospeech, 2))
         dataList.add(DataMainActivity(getString(R.string.personal_pronouns), R.drawable.person, 3))
-
         dataList.add(DataMainActivity(getString(R.string.introduction), R.drawable.handshake, 4))
         dataList.add(DataMainActivity(getString(R.string.greetings), R.drawable.introduction, 5))
         dataList.add(DataMainActivity(getString(R.string.numbers), R.drawable.numbers, 6))
-
         dataList.add(DataMainActivity(getString(R.string.time), R.drawable.time, 7))
         dataList.add(DataMainActivity(getString(R.string.days), R.drawable.days, 8))
         dataList.add(DataMainActivity(getString(R.string.months), R.drawable.annual, 9))
-
         dataList.add(DataMainActivity(getString(R.string.weather_seasons), R.drawable.season, 10))
         dataList.add(DataMainActivity(getString(R.string.family_friends), R.drawable.family, 11))
         dataList.add(DataMainActivity(getString(R.string.coolors), R.drawable.color, 12))
-
-
-
 
         dataList.add(DataMainActivity(getString(R.string.level_a2), 0, 13))
         dataList.add(DataMainActivity(getString(R.string.level_a3), 0, 14))
         dataList.add(DataMainActivity(getString(R.string.level_a4), 0, 15))
         dataList.add(DataMainActivity(getString(R.string.level_a5), 0, 16))
 
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
         photoAdapter.setDataList(dataList)
-
     }
 
+    // Load interstitial ad for clicks outside the drawer navigation
     private fun loadAds() {
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
@@ -355,12 +346,12 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                    Log.d(tag, "Ad was loaded.")
                     mInterstitialAd = interstitialAd
                 }
             })
     }
 
+    // Launch the correct activity based on clicked item
     private fun launchACtivity(data: DataMainActivity) {
         when (data.id) {
             1 -> {
@@ -369,54 +360,37 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             2 -> startActivity(Intent(this, TextToSpeechActivity::class.java))
-
             3 -> {
                 val intent = Intent(this, TabsActivity::class.java)
                 intent.putExtra("TYPE", "GROUP3")
                 startActivity(intent)
             }
-
-            ////////////////////////////////////////////////////////////////////////////////////////
-            13 -> {
-                Toast.makeText(this, getString(R.string.sub_item_2son), Toast.LENGTH_SHORT).show()
-            }
-            14 -> {
-                Toast.makeText(this, getString(R.string.sub_item_2son), Toast.LENGTH_SHORT).show()
-            }
-            15 -> {
-                Toast.makeText(this, getString(R.string.sub_item_2son), Toast.LENGTH_SHORT).show()
-            }
-            16 -> {
+            // Under development features
+            13, 14, 15, 16 -> {
                 Toast.makeText(this, getString(R.string.sub_item_2son), Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    // Inflate the options menu and setup the SearchView listener
+    // Adds search functionality in toolbar
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         val item = menu?.findItem(R.id.search)
-        val searchView: SearchView =
-            item?.actionView as SearchView
+        val searchView: SearchView = item?.actionView as SearchView
 
         searchView.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                // No action needed on submit
-                return false
+                return false // No action required on submit
             }
-
             override fun onQueryTextChange(newText: String): Boolean {
-                // Filter the list as the user types
-                filter(newText)
+                filter(newText) // Filter list while user types
                 return false
             }
         })
-
         return super.onCreateOptionsMenu(menu)
     }
 
-    // Handle menu item clicks; here, only the search icon click is handled
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.search -> true
@@ -424,10 +398,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Filter the dataList based on the query text and update the adapter
+    // Filters list based on user's search input
     private fun filter(text: String) {
         val filteredList = ArrayList<DataMainActivity>()
-
         for (item in dataList) {
             if (item.title.lowercase(Locale.getDefault())
                     .contains(text.lowercase(Locale.getDefault()))
@@ -435,51 +408,38 @@ class MainActivity : AppCompatActivity() {
                 filteredList.add(item)
             }
         }
-
         if (filteredList.isEmpty()) {
-            Toast.makeText(baseContext, getString(R.string.item_not_available), Toast.LENGTH_SHORT)
-                .show()
+            Toast.makeText(baseContext, getString(R.string.item_not_available), Toast.LENGTH_SHORT).show()
         } else {
-            // Update the adapter with the filtered list
             photoAdapter.filterList(filteredList)
         }
     }
 
-    // Update favorite icon in navigation drawer based on favorites presence in DB
+    // Updates favorite icon on resume to sync database changes
     override fun onResume() {
         super.onResume()
-        handler.postDelayed(runnable, delayTime) // استئناف التبديل من الصورة الحالية
-
+        handler.postDelayed(runnable, delayTime) // Resume slider auto-play
 
         val menu = navview.menu
         val favoriteItem = menu.findItem(R.id.itemfav)
 
         val favoriteDao = FavoriteDatabase.getInstance(this).favoriteDao()
 
-        // Fetch favorites in background
         CoroutineScope(Dispatchers.IO).launch {
             val favoriteList = favoriteDao.getAllFavorites()
-
             withContext(Dispatchers.Main) {
-                // Change icon depending on whether favorites exist
                 if (favoriteList.isEmpty()) {
-                    favoriteItem.icon =
-                        ContextCompat.getDrawable(this@MainActivity, R.drawable.unlike)
+                    favoriteItem.icon = ContextCompat.getDrawable(this@MainActivity, R.drawable.unlike)
                 } else {
-                    favoriteItem.icon =
-                        ContextCompat.getDrawable(this@MainActivity, R.drawable.like)
+                    favoriteItem.icon = ContextCompat.getDrawable(this@MainActivity, R.drawable.like)
                 }
             }
         }
     }
 
-
-    // Remove pending callbacks to prevent memory leaks when activity pauses
+    // Stop slider autoplay to avoid memory leaks
     override fun onPause() {
         super.onPause()
-        handler.removeCallbacks(runnable) // إيقاف مؤقت عند الخروج مؤقتًا من الـActivity
-
-
-
+        handler.removeCallbacks(runnable)
     }
 }

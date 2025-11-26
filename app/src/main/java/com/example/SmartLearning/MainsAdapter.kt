@@ -26,30 +26,32 @@ import kotlinx.coroutines.withContext
 class MainsAdapter(
     private val exampleList: ArrayList<Example4>,
     private val textToSpeech: TextToSpeech,
-    var showAd: Boolean = true,
-    private val adType: AdType = AdType.BANNER,
-    var nativeAd: NativeAd? = null
+    var showAd: Boolean = true,                  // Whether ads are enabled or not
+    private val adType: AdType = AdType.BANNER,  // Type of ad: Banner or Native
+    var nativeAd: NativeAd? = null               // Native ad instance when using NativeAd format
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
-        private const val VIEW_TYPE_CONTENT = 0
-        private const val VIEW_TYPE_AD = 1
-        private const val adFrequency = 9
+        private const val VIEW_TYPE_CONTENT = 0  // Normal content item
+        private const val VIEW_TYPE_AD = 1       // Ad item inside RecyclerView
+        private const val adFrequency = 9        // Insert an ad after every 9 content items
     }
 
-    private var lastPosition = -1
+    private var lastPosition = -1                // Used to animate items only once
 
-
+    // Determines which layout type to use based on position
     override fun getItemViewType(position: Int): Int {
         if (!showAd) return VIEW_TYPE_CONTENT
         return if ((position + 1) % (adFrequency + 1) == 0) VIEW_TYPE_AD else VIEW_TYPE_CONTENT
     }
 
+    // Calculates real item count including inserted ads
     override fun getItemCount(): Int {
         return if (!showAd) exampleList.size
         else exampleList.size + (exampleList.size / adFrequency)
     }
 
+    // Inflates the correct ViewHolder layout depending on the view type (Content / Banner / Native)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == VIEW_TYPE_AD) {
             val layout = if (adType == AdType.NATIVE)
@@ -65,10 +67,13 @@ class MainsAdapter(
         }
     }
 
+    // Binds data to the correct ViewHolder type
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
+
+            // Normal content item
             is ExampleViewHolder -> {
-                val actualPosition = position - (position / (adFrequency + 1))
+                val actualPosition = position - (position / (adFrequency + 1)) // Adjust index when ads appear
                 if (actualPosition < exampleList.size) {
                     val data = exampleList[actualPosition]
                     holder.bind(data)
@@ -76,6 +81,8 @@ class MainsAdapter(
                     setAnimation(holder.itemView, position)
                 }
             }
+
+            // Ad item
             is AdViewHolder -> {
                 holder.bindAd(nativeAd, adType)
                 setAnimation(holder.itemView, position)
@@ -83,6 +90,7 @@ class MainsAdapter(
         }
     }
 
+    // Item entrance animation (only when shown for the first time)
     private fun setAnimation(viewToAnimate: View, position: Int) {
         if (position > lastPosition) {
             val animation = AnimationUtils.loadAnimation(viewToAnimate.context, R.anim.item_anim)
@@ -91,6 +99,7 @@ class MainsAdapter(
         }
     }
 
+    // Remove animation when item is recycled
     override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
         holder.itemView.clearAnimation()
         super.onViewDetachedFromWindow(holder)
@@ -98,13 +107,17 @@ class MainsAdapter(
 
     // --------------------- AD HOLDER ---------------------
     class AdViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        // Handles loading either Banner Ad or Native Ad
         fun bindAd(nativeAd: NativeAd?, adType: AdType) {
+            // Banner Ad
             if (adType == AdType.BANNER) {
                 val adView = itemView.findViewById<AdView>(R.id.adView)
                 adView.loadAd(AdRequest.Builder().build())
                 return
             }
 
+            // Native Ad
             if (adType == AdType.NATIVE && nativeAd != null) {
                 val adView = itemView.findViewById<NativeAdView>(R.id.native_ad_view)
 
@@ -113,6 +126,7 @@ class MainsAdapter(
                 adView.iconView = adView.findViewById(R.id.ad_app_icon)
                 adView.mediaView = adView.findViewById(R.id.ad_media)
 
+                // Fill ad components
                 (adView.headlineView as TextView).text = nativeAd.headline
                 (adView.bodyView as TextView).text = nativeAd.body ?: ""
 
@@ -137,19 +151,21 @@ class MainsAdapter(
         private var current: Example4? = null
         private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
-
+        // Binds text and sound icon
         fun bind(data: Example4) {
             current = data
             text1.text = data.text1
             text2.text = data.text2
             imageSound.setImageResource(data.imageViewSound)
 
+            // Play Text-to-Speech sound
             imageSound.setOnClickListener {
                 val txt = data.text1.replace("\n", " ").trim()
                 textToSpeech.speak(txt, TextToSpeech.QUEUE_FLUSH, null, null)
             }
         }
 
+        // Handles adding and removing favorites in database
         fun handleFavorite(data: Example4) {
             val repo = FavoritesManager.repo(itemView.context)
 
@@ -165,12 +181,20 @@ class MainsAdapter(
                         if (isFavorite) {
                             repo.add(data.copy(isFavorite = true))
                             withContext(Dispatchers.Main) {
-                                Toast.makeText(itemView.context, itemView.context.getString(R.string.added_to_favorites), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    itemView.context,
+                                    itemView.context.getString(R.string.added_to_favorites),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         } else {
                             repo.remove(data)
                             withContext(Dispatchers.Main) {
-                                Toast.makeText(itemView.context, itemView.context.getString(R.string.removed_from_favorites), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    itemView.context,
+                                    itemView.context.getString(R.string.removed_from_favorites),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                     }
@@ -178,12 +202,12 @@ class MainsAdapter(
             }
         }
 
+        // Changes icon according to current favorite state
         private fun updateFavorite(isFav: Boolean) {
             imageLike.setImageResource(if (isFav) R.drawable.like else R.drawable.unlike)
         }
     }
 }
-
 
 
 

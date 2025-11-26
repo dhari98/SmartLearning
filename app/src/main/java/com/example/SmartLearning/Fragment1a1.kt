@@ -22,15 +22,29 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.nativead.NativeAd
 import java.util.Locale
 
+
+/**
+ * Fragment1a1
+ *
+ * This fragment displays the German alphabet as a list of items using RecyclerView.
+ * Each item can be pronounced using Text-To-Speech, marked as favorite, and includes
+ * inline (native) ads that appear inside the list.
+ *
+ * Features used in this screen:
+ *  ✔ RecyclerView + Animation
+ *  ✔ Text-To-Speech (German)
+ *  ✔ Native AdMob Ads inside the list
+ */
 class Fragment1a1 : Fragment() {
 
     private lateinit var recycler1a1: RecyclerView
     private lateinit var textToSpeech: TextToSpeech
     private var nativeAd: NativeAd? = null
 
+    // Native AdMob test unit ID
     private val nativeAdUnitId = "ca-app-pub-3940256099942544/2247696110"
 
-    // Adapter متغير ليتم تحديثه لاحقاً
+    // Adapter reference to update ad when loaded
     private lateinit var adapter: MainsAdapter
 
     override fun onCreateView(
@@ -45,6 +59,10 @@ class Fragment1a1 : Fragment() {
 
         recycler1a1 = view.findViewById(R.id.recycler1a1)
 
+        /**
+         * Initialize Text-To-Speech
+         * German voice → used to pronounce alphabet items
+         */
         textToSpeech = TextToSpeech(requireContext()) { status ->
             if (status == TextToSpeech.SUCCESS) {
                 textToSpeech.language = Locale.GERMANY
@@ -53,11 +71,24 @@ class Fragment1a1 : Fragment() {
             }
         }
 
+        /**
+         * Apply layout animation to RecyclerView items
+         * Gives a smooth appearance when the list loads
+         */
         val lac = LayoutAnimationController(AnimationUtils.loadAnimation(requireContext(), R.anim.item_anim))
         lac.delay = 0.20f
         lac.order = LayoutAnimationController.ORDER_NORMAL
         recycler1a1.layoutAnimation = lac
 
+        /**
+         * Create the list of alphabet items.
+         * Each Example4 contains:
+         *  - like icon
+         *  - sound icon
+         *  - German letter
+         *  - Example word
+         *  - unique id
+         */
 
 
         // تحضير قائمة البيانات
@@ -91,7 +122,10 @@ class Fragment1a1 : Fragment() {
             Example4(R.drawable.unlike, R.drawable.sound, getString(R.string.z_example), getString(R.string.z_word) + " ", 26)
         )
 
-        // 1. إنشاء Adapter بدون الإعلان أولاً (showAd=false, nativeAd=null)
+        /**
+         * Step 1 — Initialize adapter without ads first.
+         * When the ad is loaded later, the adapter gets updated.
+         */
         adapter = MainsAdapter(
             exampleList = users1a1,
             textToSpeech = textToSpeech,
@@ -103,10 +137,13 @@ class Fragment1a1 : Fragment() {
         recycler1a1.layoutManager = LinearLayoutManager(requireContext())
         recycler1a1.adapter = adapter
 
-        // 2. تحميل الإعلان في الخلفية
+        // Step 2 — Load Native Ad in the background
         loadNativeAd()
 
-        // 3. استمع للتمرير لإظهار إعلان واحد فقط حسب كودك
+        /**
+         * Step 3 — Ensure only ONE native ad is visible while scrolling
+         * This improves UI quality and avoids showing multiple ads at once
+         */
         recycler1a1.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -131,19 +168,21 @@ class Fragment1a1 : Fragment() {
         })
     }
 
+    /**
+     * Load AdMob Native Ad and update the adapter once loaded
+     */
     @SuppressLint("NotifyDataSetChanged")
     private fun loadNativeAd() {
         val builder = AdLoader.Builder(requireContext(), nativeAdUnitId)
 
         builder.forNativeAd { ad: NativeAd ->
-            // الإعلان تم تحميله
             nativeAd = ad
 
-            // حدث المتغيرات في الـ Adapter وأبلغ الـ RecyclerView بالتغيير
+            // Update adapter to enable ad display
             adapter.showAd = true
             adapter.nativeAd = nativeAd
 
-            // نعيد تحديث الإعلان فقط (أو القائمة كلها)
+            // Refresh the list to insert ads
             adapter.notifyDataSetChanged()
         }
 
@@ -151,6 +190,9 @@ class Fragment1a1 : Fragment() {
         adLoader.loadAd(AdRequest.Builder().build())
     }
 
+    /**
+     * Cleanup — Release TTS and Ad resource to prevent memory leaks
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         if (::textToSpeech.isInitialized) {

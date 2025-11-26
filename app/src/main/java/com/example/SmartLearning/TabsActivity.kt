@@ -2,7 +2,6 @@
 
 package com.example.SmartLearning
 
-
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -22,57 +21,58 @@ class TabsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tabs)
 
+        // Load views
         tabLayout = findViewById(R.id.tabLayout)
         viewPager = findViewById(R.id.viewPager)
 
-
+        // Detect if current theme is dark mode
         val isNightMode = (resources.configuration.uiMode and
                 Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 
+        // Text color for unselected tabs
         val normalTextColor = if (isNightMode) {
             ContextCompat.getColor(this, R.color.white)
         } else {
             ContextCompat.getColor(this, R.color.black)
         }
 
+        // Text color for selected tab
         val selectedTextColor = if (isNightMode) {
             ContextCompat.getColor(this, R.color.white)
         } else {
             ContextCompat.getColor(this, R.color.black)
         }
 
+        // Apply tab text colors
         tabLayout.setTabTextColors(normalTextColor, selectedTextColor)
 
+        // Change underline indicator color under selected tab
         tabLayout.setSelectedTabIndicatorColor(
             ContextCompat.getColor(this, R.color.colorPrimary2)
         )
 
-
-
-        // نحدد نوع المجموعة من خلال intent
+        // Receive type of group sent from MainActivity to decide which fragments to show
         val type = intent.getStringExtra("TYPE") ?: "GROUP1"
 
+        // Get fragments & titles based on group type
         val (fragments, titles) = getFragmentsForType(type)
 
-        // تعيين الـ Adapter للـ ViewPager
+        // Set adapter for ViewPager
         viewPager.adapter = TabsPagerAdapter(this, fragments)
 
-        // ربط الـ TabLayout بالـ ViewPager
+        // Connect TabLayout with ViewPager
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = titles[position]
         }.attach()
     }
 
-
-
-
-
-
+    // Decide which fragments and titles will appear based on the type received from intent
     private fun getFragmentsForType(type: String): Pair<List<Fragment>, List<String>> {
         val context = this
 
         return when (type) {
 
+            // GROUP1 → 3 repeated fragments with 3 tab titles
             "GROUP1" -> Pair(
                 listOf(
                     Fragment1a1(),
@@ -82,10 +82,11 @@ class TabsActivity : AppCompatActivity() {
                 listOf(
                     context.getString(R.string.Grammar),
                     context.getString(R.string.Readingandlistening),
-                    context.getString(R.string.words)   // ➕ تمت إضافة عنوان ثالث
+                    context.getString(R.string.words)
                 )
             )
 
+            // GROUPNEVA1 → 2 fragments only (A1 section in locked mode)
             "GROUPNEVA1" -> Pair(
                 listOf(
                     FragmentGrammarA1(),
@@ -97,6 +98,7 @@ class TabsActivity : AppCompatActivity() {
                 )
             )
 
+            // GROUP3 → words, word test, audio test
             "GROUP3" -> Pair(
                 listOf(
                     Fragment3a1(),
@@ -110,18 +112,21 @@ class TabsActivity : AppCompatActivity() {
                 )
             )
 
+            // If no valid type is received → return empty
             else -> Pair(emptyList(), emptyList())
         }
     }
 
-
-    // الـ Adapter مدمج داخل نفس الكلاس
-     class TabsPagerAdapter(
+    // ViewPager2 adapter to display the fragments
+    class TabsPagerAdapter(
         activity: AppCompatActivity,
         private val fragments: List<Fragment>
     ) : FragmentStateAdapter(activity) {
+
+        // Total number of fragments
         override fun getItemCount(): Int = fragments.size
+
+        // Return fragment for each position
         override fun createFragment(position: Int): Fragment = fragments[position]
     }
 }
-

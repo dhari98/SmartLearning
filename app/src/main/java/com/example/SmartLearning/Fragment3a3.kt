@@ -21,19 +21,25 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import java.util.Locale
 
-
 class Fragment3a3 : Fragment(), View.OnClickListener {
 
+    // ViewBinding to safely access layout views
     private lateinit var binding: Fragment3a3Binding
+
+    // Text-To-Speech engine for playing German words
     private lateinit var tts: TextToSpeech
+
+    // Banner AdView for AdMob monetization
     private lateinit var mAdView: com.google.android.gms.ads.AdView
 
-    private var currentPosition = 1
+    // ===== Quiz State Control Variables =====
+    private var currentPosition = 1                // Tracks current question index
     private var questionsList: List<Question2> = emptyList()
-    private var selectedOption = 0
-    private var isAnswerChecked = false
-    private var correctAnswers = 0
+    private var selectedOption = 0                 // Stores which option user selected
+    private var isAnswerChecked = false            // Prevent multiple checks on same question
+    private var correctAnswers = 0                 // Counts user score
 
+    // List of German pronouns used for Text-To-Speech playback
     private val germanNumbers by lazy {
         listOf(
             getString(R.string.personal_pronoun), getString(R.string.ich),
@@ -54,16 +60,24 @@ class Fragment3a3 : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Initialize AdMob banner ad
         MobileAds.initialize(requireContext()) {}
         mAdView = binding.adView
         mAdView.loadAd(AdRequest.Builder().build())
 
+        // Initialize TTS engine
         initializeTextToSpeech()
 
+        // Load quiz data and prepare UI
         setupQuiz()
+
+        // Attach click listeners to all buttons
         setClickListeners()
     }
 
+    /**
+     * Configure Text-To-Speech engine for German language output
+     */
     private fun initializeTextToSpeech() {
         tts = TextToSpeech(requireContext()) { status ->
             if (status == TextToSpeech.SUCCESS) {
@@ -74,11 +88,17 @@ class Fragment3a3 : Fragment(), View.OnClickListener {
         }
     }
 
+    /**
+     * Load full question list for this quiz and display first question
+     */
     private fun setupQuiz() {
         questionsList = AudioQuizzes.AudioQuestion3(requireContext())
         setQuestion()
     }
 
+    /**
+     * Register option button listeners + submit button listener
+     */
     private fun setClickListeners() = binding.apply {
         tvOptionOne.setOnClickListener(this@Fragment3a3)
         tvOptionTwo.setOnClickListener(this@Fragment3a3)
@@ -87,6 +107,9 @@ class Fragment3a3 : Fragment(), View.OnClickListener {
         btnSubmit.setOnClickListener(this@Fragment3a3)
     }
 
+    /**
+     * Display current question and reset UI states for new attempt
+     */
     @SuppressLint("SetTextI18n")
     private fun setQuestion() {
         enableOptions(true)
@@ -99,7 +122,11 @@ class Fragment3a3 : Fragment(), View.OnClickListener {
         binding.apply {
             btnSubmit.text = getString(R.string.submit_answer)
             tvQuestion.text = q.question
+
+            // Play audio automatically from second question onward
             if (currentPosition > 1) speakWord(q.id - 1)
+
+            // Replay audio when image is clicked
             ivImage.setOnClickListener { speakWord(q.id - 1) }
 
             tvOptionOne.text = q.optionOne
@@ -109,12 +136,18 @@ class Fragment3a3 : Fragment(), View.OnClickListener {
         }
     }
 
+    /**
+     * Trigger Text-To-Speech playback for selected word
+     */
     private fun speakWord(index: Int) {
         if (index in germanNumbers.indices) {
             tts.speak(germanNumbers[index], TextToSpeech.QUEUE_FLUSH, null, "utt_${System.nanoTime()}")
         }
     }
 
+    /**
+     * Reset option buttons to default style before new selection
+     */
     private fun resetOptionStyles() {
         listOf(binding.tvOptionOne, binding.tvOptionTwo, binding.tvOptionThree, binding.tvOptionFour)
             .forEach { tv ->
@@ -124,6 +157,9 @@ class Fragment3a3 : Fragment(), View.OnClickListener {
             }
     }
 
+    /**
+     * Handle user click on UI elements
+     */
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.tv_option_one -> selectOption(binding.tvOptionOne, 1)
@@ -134,11 +170,13 @@ class Fragment3a3 : Fragment(), View.OnClickListener {
         }
     }
 
+    /**
+     * Update UI when user selects one of the 4 options
+     */
     private fun selectOption(tv: TextView, optionNumber: Int) {
         if (isAnswerChecked) return
         resetOptionStyles()
         selectedOption = optionNumber
-
         tv.apply {
             setTextColor("#808080".toColorInt())
             setTypeface(typeface, Typeface.BOLD)
@@ -146,12 +184,18 @@ class Fragment3a3 : Fragment(), View.OnClickListener {
         }
     }
 
+    /**
+     * Validate answer or move to next question depending on button state
+     */
     private fun handleSubmit() {
         if (isAnswerChecked) { moveToNextQuestion(); return }
         if (selectedOption == 0) { showToast(getString(R.string.select_answer_first)); return }
         checkAnswer()
     }
 
+    /**
+     * Display whether selected answer is correct or wrong and update user score
+     */
     private fun checkAnswer() {
         val q = questionsList[currentPosition - 1]
 
@@ -165,16 +209,25 @@ class Fragment3a3 : Fragment(), View.OnClickListener {
 
         highlightOption(q.correctAnswer, R.drawable.correct_option_border_bg)
         enableOptions(false)
-        binding.btnSubmit.text = if (isLastQuestion()) getString(R.string.quiz_result) else getString(R.string.next_question)
+        binding.btnSubmit.text =
+            if (isLastQuestion()) getString(R.string.quiz_result)
+            else getString(R.string.next_question)
+
         isAnswerChecked = true
         selectedOption = 0
     }
 
+    /**
+     * Move to next question or finish quiz if user reached the end
+     */
     private fun moveToNextQuestion() {
         currentPosition++
         if (currentPosition <= questionsList.size) setQuestion() else showResults()
     }
 
+    /**
+     * Navigate to ResultActivity and send total score through Intent
+     */
     private fun showResults() {
         Intent(requireContext(), ResultActivity::class.java).apply {
             putExtra(WordQuizzes.TOTAL_QUESTION, questionsList.size)
@@ -184,6 +237,9 @@ class Fragment3a3 : Fragment(), View.OnClickListener {
         requireActivity().finish()
     }
 
+    /**
+     * Highlight correct / incorrect option after answer check
+     */
     private fun highlightOption(option: Int, backgroundRes: Int) {
         val tv = when (option) {
             1 -> binding.tvOptionOne
@@ -195,6 +251,9 @@ class Fragment3a3 : Fragment(), View.OnClickListener {
         tv?.background = ContextCompat.getDrawable(requireContext(), backgroundRes)
     }
 
+    /**
+     * Enable or disable clickability of the 4 answer choices
+     */
     private fun enableOptions(enable: Boolean) = binding.apply {
         tvOptionOne.isEnabled = enable
         tvOptionTwo.isEnabled = enable
@@ -202,17 +261,20 @@ class Fragment3a3 : Fragment(), View.OnClickListener {
         tvOptionFour.isEnabled = enable
     }
 
+    /**
+     * Check if current question is the last one in the quiz
+     */
     private fun isLastQuestion() = currentPosition == questionsList.size
 
     private fun showToast(msg: String) = Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
 
     override fun onPause() {
         super.onPause()
-        if (::tts.isInitialized) tts.stop()
+        if (::tts.isInitialized) tts.stop()     // Stop audio when fragment pauses
     }
 
     override fun onDestroy() {
-        if (::tts.isInitialized) tts.shutdown()
+        if (::tts.isInitialized) tts.shutdown() // Release TTS resources
         super.onDestroy()
     }
 }
