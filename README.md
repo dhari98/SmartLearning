@@ -9,14 +9,23 @@ The app is built using **Kotlin + XML** with clean UI and smooth experience.
 ## 🚀 Features
 
 🎓 Learning System
+
 🔤 German alphabet, daily vocabulary and grammar (A1 Level – You can add grammar rules here)
+
 🗣 Pronunciation exercises with Text-To-Speech
+
 🎤 Text-to-Speech feature to pronounce words for the user
+
 🧠 Interactive quizzes with instant result animations
+
 ⭐ Favorites system for saved words
+
 🔍 Search system to find any lesson or word instantly in the home screen
+
 🌍 Multi-language support (Arabic – English) with automatic language switching depending on device language
+
 🌓 Light/Dark Mode support
+
 💰 AdMob Monetization
 
 This app uses Google AdMob to generate revenue.
