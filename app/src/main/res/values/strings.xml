@@ -1,288 +1,283 @@
 <resources>
     <string name="app_name">SmartLearning</string>
 
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
-    <string name="open" />
-    <string name="close" />
+    <string name="favo">Favorites List</string>
 
-
-    <string name="favo">قائمة المفضلة</string>
-
-    <string name="gramatik">القواعد</string>
-    <string name="sub_item_1">A1 قواعد</string>
-    <string name="sub_item_2">A2 قواعد</string>
-
-    <string name="sub_item_3">قواعد B1</string>
-    <string name="sub_item_4">B2 قواعد</string>
-
-    <string name="sub_item_5">C1 قواعد</string>
+    <string name="gramatik">Grammar</string>
+    <string name="sub_item_1">A1 Grammar</string>
+    <string name="sub_item_2">A2 Grammar</string>
+    <string name="sub_item_3">B1 Grammar</string>
+    <string name="sub_item_4">B2 Grammar</string>
+    <string name="sub_item_5">C1 Grammar</string>
     <string name="sub_item_6">A1</string>
 
-
     <!-- Text_to_speech MainActivity -->
-    <!-- تحويل النص الى كلام -->
-    <string name="asa">اكتب النص او الجملة بالالمانية</string>
-    <string name="pitch">تغير الصوت</string>
-    <string name="bbb">سرعة الصوت</string>
-    <string name="start">اضغط هنا</string>
-    <string name="tv1">في حال لا يعمل الصوت</string>
-    <string name="tv2">افتح الضبط ⚙️ في جهازك ثم خيار تحويل النص الى حديث</string>
-    <string name="tv3">خيار المحرك المفضل اختار(الخدمات الصوتيه من Google)</string>
-    <string name="tv4">الخيار الثاني (اللغة) اختار اللغة الالمانية</string>
+    <string name="asa">Write the text or sentence in German</string>
+    <string name="pitch">Pitch</string>
+    <string name="bbb">Speech speed</string>
+    <string name="start">Press here</string>
+    <string name="tv1">If voice does not work</string>
+    <string name="tv2">Go to Settings ⚙️ → Text-to-Speech Output</string>
+    <string name="tv3">Select Google Speech Services as the preferred engine</string>
+    <string name="tv4">Choose German as the language</string>
 
-    <string name="texttospeech">اكتب أي شي ثم اضغط هنا..</string>
+    <string name="texttospeech">Write anything then press here…</string>
 
+    <string name="words">Words</string>
+    <string name="word_test">Words Test</string>
+    <string name="audio_test">Audio Test</string>
 
-    <string name="words">الكلمات</string>
-    <string name="word_test">اختبار الكلمات</string>
-    <string name="audio_test">اختبار صوتي</string>
+    <string name="text1">The word</string>
+    <string name="text2">Pronunciation</string>
+    <string name="text3">Meaning</string>
 
+    <string name="sub_item_2son">Coming soon</string>
 
-    <string name="text1">الكلمة</string>
-    <string name="text2">نطقها</string>
-    <string name="text3">معناها</string>
+    <string name="about">About the App</string>
+    <string name="strats">Rate the App</string>
+    <string name="share">Share App</string>
 
-    <string name="sub_item_2son">سيتوفر قريباً</string>
-
-
-    <string name="about">حول التطبيق</string>
-    <string name="strats">تقيم التطبيق</string>
-    <string name="share">مشاركة التطبيق</string>
-
-    <string name="search">search</string>
+    <string name="search">Search</string>
     <string name="textviewtt">aaaaaaaaaaaaaaaaaaa</string>
-    <string name="title">title\n</string>
-    <string name="todo" />
+    <string name="title">Title</string>
+    <string name="todo">TODO</string>
 
-    <string name="item_not_available">هذا العنصر غير متوفر..</string>
+    <string name="item_not_available">This item is not available.</string>
 
-
-    <string name="Grammar">قواعد اللغة</string>
-    <string name="Readingandlistening">القراءة والاستماع</string>
-
+    <string name="Grammar">Grammar</string>
+    <string name="Readingandlistening">Reading / Listening</string>
 
     <!-- notification -->
-    <string name="notification_allowed">تم السماح بالإشعارات</string>
-    <string name="notification_denied">لم يتم السماح بالإشعارات</string>
+    <string name="notification_allowed">Notifications allowed</string>
+    <string name="notification_denied">Notifications denied</string>
 
-    <string name="sub_item_1_1">🔒 A1 المستوى</string>
-    <string name="sub_item_1_2">✅ A1 المستوى</string>
+    <string name="sub_item_1_1">🔒 A1 Level</string>
+    <string name="sub_item_1_2">✅ A1 Level</string>
 
-    <string name="ad_alert_title">تنبيه</string>
-    <string name="ad_alert_message">يجب مشاهدة الإعلان لفتح هذه الصفحة. هل تريد المتابعة؟</string>
-    <string name="yes">نعم</string>
-    <string name="no">لا</string>
-    <string name="ad_failed_to_show">فشل عرض الإعلان</string>
-    <string name="ad_not_ready">الإعلان غير جاهز بعد، برجاء المحاولة لاحقًا</string>
+    <string name="ad_alert_title">Alert</string>
+    <string name="ad_alert_message">You must watch the ad to open this page. Do you want to continue?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ad_failed_to_show">Failed to show ad</string>
+    <string name="ad_not_ready">Ad is not ready yet, please try again later</string>
 
+    <string name="letters">Letters</string>
+    <string name="special_letters">Special Letters</string>
+    <string name="compound_letters">Compound Letters</string>
 
-    <string name="letters">ألحروف</string>
-    <string name="special_letters">الحروف الخاصة</string>
-    <string name="compound_letters">ألحروف المركبة</string>
+    <!-- A1 Main Activities -->
+    <string name="level_a1">Level One</string>
+    <string name="level_a2">Level Two</string>
+    <string name="level_a3">Level Three</string>
+    <string name="level_a4">Level Four</string>
+    <string name="level_a5">Level Five</string>
 
+    <string name="letters_pronunciation">Letters and Pronunciation</string>
+    <string name="text_to_speech">Text-to-Speech</string>
+    <string name="personal_pronouns">Personal Pronouns</string>
 
-    <!-- A1 MainActivitis -->
-    <string name="level_a1">المستوى الاول</string>
-    <string name="level_a2">المستوى الثاني</string>
-    <string name="level_a3">المستوى الثالث</string>
-    <string name="level_a4">المستوى الرابع</string>
-    <string name="level_a5">المستوى الخامس</string>
+    <string name="introduction">Introduction</string>
+    <string name="greetings">Greetings</string>
+    <string name="numbers">Numbers</string>
 
-    <string name="letters_pronunciation">الحروف ونطقها</string>
-    <string name="text_to_speech">تحويل النص الى كلام</string>
-    <string name="personal_pronouns">الضمائر الشخصيه</string>
+    <string name="time">Time</string>
+    <string name="days">Days of the Week</string>
+    <string name="months">Months</string>
 
-    <string name="introduction">التعارف</string>
-    <string name="greetings">التحايا</string>
-    <string name="numbers">الارقام</string>
+    <string name="weather_seasons">Weather and Seasons</string>
+    <string name="family_friends">Family and Friends</string>
+    <string name="coolors">Colors</string>
 
-    <string name="time">الاوقات</string>
-    <string name="days">أيام الأسبوع</string>
-    <string name="months">الاشهر</string>
-
-    <string name="weather_seasons">الطقس وفصول السنه</string>
-    <string name="family_friends">العائلة و الاصدقاء</string>
-    <string name="coolors">الألوان</string>
-
-
-    <string name="ad_label">إعلان</string>
-
+    <string name="ad_label">Ad</string>
 
     <!-- ResultActivity Texts -->
-    <!-- نصوص شاشة نتيجةى الاختبارات -->
-    <string name="score_text">نتيجة اختبارك %1$d من %2$d</string>
+    <string name="score_text">Your score is %1$d out of %2$d</string>
     <string name="quiz2">TextView</string>
-    <string name="qqqq">النتيجة</string>
-    <string name="qqqqqqq">image</string>
-    <string name="qqqqqqqqqq">اختبر نفسك باستمرار ليساعدك بسرعة الحفظ</string>
-    <string name="qqqqqqqqqqqq">العودة الى الصفحة الرئيسية</string>
+    <string name="qqqq">Result</string>
+    <string name="qqqqqqq">Image</string>
+    <string name="qqqqqqqqqq">Keep testing yourself to memorize words faster</string>
+    <string name="qqqqqqqqqqqq">Return to Home</string>
     <string name="quiz_image">Quiz Image</string>
-    <string name="qq">السؤال</string>
-    <string name="kkk">العودة الى الصفحة الرئيسية</string>
-    <string name="ookkkkkk">اختبر نفسك دوماً وباستمرار</string>
-    <string name="ookkkkkk2">حتى تستطيع حفظ المزيد من الكلمات</string>
+    <string name="qq">Question</string>
+    <string name="kkk">Return to Home</string>
+    <string name="ookkkkkk">Always test yourself</string>
+    <string name="ookkkkkk2">To learn more words</string>
 
-    <!-- Test words -->
-    <!-- كلمات الاختبار -->
-    <string name="q2_qworld">ما معنى كلمة</string>
-    <string name="audio_instruction">اضغط على زر تشغيل الصوت ثم اختر الإجابة</string>
+    <!-- Words Test -->
+    <string name="q2_qworld">What is the meaning of</string>
+    <string name="audio_instruction">Tap the play button then choose the correct answer</string>
 
-    <!-- نصوص المفضلة -->
-    <!-- Favorite Texts -->
+    <!-- Favorites -->
+    <string name="empty_favorites">Favorites list is empty</string>
 
-    <string name="empty_favorites">قائمة الكلمات المفضلة فارغة</string>
+    <string name="share_app_text">Download German Learning App now:\nhttps://play.google.com/store/apps/details?id=%1$s</string>
 
-
-    <string name="share_app_text">حَمِل الآن تطبيق تعليم اللغة الألمانية\nhttps://play.google.com/store/apps/details?id=%1$s</string>
-
-
-    <!-- App_About -->
-    <!-- حول التطبيق -->
-    <string name="designabout">تم إعداد وتَصميم وبرمجة هذا التطبيق من قِبَل</string>
-    <string name="progname">المُبرمج ضاري العنِزي</string>
+    <!-- About App -->
+    <string name="designabout">Developed and designed by</string>
+    <string name="progname">Dhari Al-rufaye</string>
     <string name="mesage">TODO</string>
-    <string name="tocommunicate">للتَواصل حول قتراحاتَكم أو مٌلاحظاتكم</string>
-    <string name="sharing">شاركِ التطبيق مع ألأصدقاء</string>
+    <string name="tocommunicate">For suggestions or feedback</string>
+    <string name="sharing">Share the app with friends</string>
     <string name="star">TODO</string>
-    <string name="evaluate">قيّم التطبيق</string>
-    <string name="textview">الإصدار: </string>
-    <!-- Test words -->
-    <!-- كلمات الاختبار -->
+    <string name="evaluate">Rate App</string>
+    <string name="textview">Version: </string>
 
-    <string name="last_question">السؤال الأخير</string>
-    <string name="submit_answer">تثبيت الجواب</string>
-    <string name="select_answer_first">اختار الاجابة أولاً</string>
-    <string name="wrong_answer">الجواب خطأ</string>
-    <string name="correct_answer">الجواب صح</string>
-    <string name="quiz_result">نتيجة الاختبار</string>
-    <string name="next_question">السؤال الآخر</string>
+    <!-- Test words common text -->
+    <string name="last_question">Last question</string>
+    <string name="submit_answer">Submit answer</string>
+    <string name="select_answer_first">Select an answer first</string>
+    <string name="wrong_answer">Wrong answer</string>
+    <string name="correct_answer">Correct answer</string>
+    <string name="quiz_result">Quiz result</string>
+    <string name="next_question">Next question</string>
+
+    <!-- Personal Pronouns Section -->
+    <string name="added_to_favorites">Added to favorites</string>
+    <string name="removed_from_favorites">Removed from favorites</string>
+
+    <string name="oppositequalitiesa1">Opposite Adjectives A1</string>
+    <string name="conjunctions">Conjunctions</string>
+    <string name="verbs_a1">A1 Verbs</string>
+
+
+
 
 
     <!-- Fragment1a1 Deutsches Alphabet -->
-    <!-- Fragment1a1 حروف الهجاء الألمانية -->
-    <string name="german_alphabet">حروف الهجاء الألمانية</string>
+    <!-- German Alphabet -->
+    <string name="german_alphabet">German alphabet</string>
     <string name="deutsches_alphabet">Deutsches Alphabet</string>
 
     <string name="a_example">A / a</string>
-    <string name="a_word">Apfel\nتفاحة</string>
+    <string name="a_word">Apfel\nApple</string>
 
     <string name="b_example">B / b</string>
-    <string name="b_word">Buch\nكتاب</string>
+    <string name="b_word">Buch\nBook</string>
 
     <string name="c_example">C / c</string>
-    <string name="c_word">Cafe\nمقهى</string>
+    <string name="c_word">Cafe\nCafé</string>
 
     <string name="d_example">D / d</string>
-    <string name="d_word">Dorf\nقرية</string>
+    <string name="d_word">Dorf\nVillage</string>
 
     <string name="e_example">E / e</string>
-    <string name="e_word">Essen\nطعام</string>
+    <string name="e_word">Essen\nFood</string>
 
     <string name="f_example">F / f</string>
-    <string name="f_word">Fisch\nسمكة</string>
+    <string name="f_word">Fisch\nFish</string>
 
     <string name="g_example">G / g</string>
-    <string name="g_word">Garten\nحديقة</string>
+    <string name="g_word">Garten\nGarden</string>
 
     <string name="h_example">H / h</string>
-    <string name="h_word">Haus\nمنزل</string>
+    <string name="h_word">Haus\nHouse</string>
 
     <string name="i_example">I / i</string>
-    <string name="i_word">Insel\nجزيرة</string>
+    <string name="i_word">Insel\nIsland</string>
 
     <string name="j_example">J / j</string>
-    <string name="j_word">Jahr\nسنة</string>
+    <string name="j_word">Jahr\nYear</string>
 
     <string name="k_example">K / k</string>
-    <string name="k_word">Küche\nمطبخ</string>
+    <string name="k_word">Küche\nKitchen</string>
 
     <string name="l_example">L / l</string>
-    <string name="l_word">Leben\nحياة</string>
+    <string name="l_word">Leben\nLife</string>
 
     <string name="m_example">M / m</string>
-    <string name="m_word">Mutter\nأم</string>
+    <string name="m_word">Mutter\nMother</string>
 
     <string name="n_example">N / n</string>
-    <string name="n_word">Nacht\nليل</string>
+    <string name="n_word">Nacht\nNight</string>
 
     <string name="o_example">O / o</string>
-    <string name="o_word">Obst\nفاكهة</string>
+    <string name="o_word">Obst\nFruit</string>
 
     <string name="p_example">P / p</string>
-    <string name="p_word">Pferd\nحصان</string>
+    <string name="p_word">Pferd\nHorse</string>
 
     <string name="q_example">Q / q</string>
-    <string name="q_word">Qualität\nجودة</string>
+    <string name="q_word">Qualität\nQuality</string>
 
     <string name="r_example">R / r</string>
-    <string name="r_word">Reise\nسفر</string>
+    <string name="r_word">Reise\nTravel</string>
 
     <string name="s_example">S / s</string>
-    <string name="s_word">Sommer\nصيف</string>
+    <string name="s_word">Sommer\nSummer</string>
 
     <string name="t_example">T / t</string>
-    <string name="t_word">Tisch\nطاولة</string>
+    <string name="t_word">Tisch\nTable</string>
 
     <string name="u_example">U / u</string>
-    <string name="u_word">Uhr\nساعة</string>
+    <string name="u_word">Uhr\nClock</string>
 
     <string name="v_example">V / v</string>
-    <string name="v_word">Vogel\nطائر</string>
+    <string name="v_word">Vogel\nBird</string>
 
     <string name="w_example">W / w</string>
-    <string name="w_word">Wasser\nماء</string>
+    <string name="w_word">Wasser\nWater</string>
 
     <string name="x_example">X / x</string>
-    <string name="x_word">Xylophon\nآلة إيقاع</string>
+    <string name="x_word">Xylophon\nXylophone</string>
 
     <string name="y_example">Y / y</string>
-    <string name="y_word">Yacht\nيخت</string>
+    <string name="y_word">Yacht\nYacht</string>
 
     <string name="z_example">Z / z</string>
-    <string name="z_word">Zebra\nحمار وحشي</string>
+    <string name="z_word">Zebra\nZebra</string>
 
 
-    <string name="personal_pronoun">PersonalPronomen</string>
-    <string name="personal_pronoun_ar">الضمائر الشخصيه</string>
+    <string name="personal_pronoun">Personal pronouns</string>
+    <string name="personal_pronoun_ar">Personal pronouns</string>
+
     <string name="ich">Ich</string>
-    <string name="ich_ar">أنا</string>
+    <string name="ich_ar">I</string>
+
     <string name="du">Du</string>
-    <string name="du_ar">أنتَ/أنتِ\n(للمفرد)</string>
+    <string name="du_ar">You (singular)</string>
+
     <string name="er">Er</string>
-    <string name="er_ar">هو</string>
+    <string name="er_ar">He</string>
+
     <string name="sie">sie</string>
-    <string name="sie_ar">هي</string>
+    <string name="sie_ar">She</string>
+
     <string name="es">Es</string>
-    <string name="es_ar">هو/هي\n(لغير العاقل+الحيادي)</string>
+    <string name="es_ar">It (neutral / non-living)</string>
+
     <string name="wir">Wir</string>
-    <string name="wir_ar">نحن</string>
+    <string name="wir_ar">We</string>
+
     <string name="ihr">Ihr</string>
-    <string name="ihr_ar">أنتم</string>
+    <string name="ihr_ar">You (plural)</string>
+
     <string name="sie_polite">Sie</string>
-    <string name="sie_polite_ar">هم / حضرتك\n(للكل بصيغة الاحترام)</string>
+    <string name="sie_polite_ar">They / You (formal)</string>
+
     <string name="dieser">Dieser</string>
-    <string name="dieser_ar">هذا\n(مذكر)</string>
+    <string name="dieser_ar">This (masculine)</string>
+
     <string name="diese">Diese</string>
-    <string name="diese_ar">هذه\n(مؤنث/جمع)</string>
+    <string name="diese_ar">This (feminine / plural)</string>
+
     <string name="dieses">Dieses</string>
-    <string name="dieses_ar">هذا\n(محايد)</string>
+    <string name="dieses_ar">This (neutral)</string>
+
     <string name="jener">Jener</string>
-    <string name="jener_ar">ذلك\n(مذكر)</string>
+    <string name="jener_ar">That (masculine)</string>
+
     <string name="jene">Jene</string>
-    <string name="jene_ar">تلك\n(مؤنث / جمع)</string>
+    <string name="jene_ar">That (feminine / plural)</string>
+
     <string name="jenes">Jenes</string>
-    <string name="jenes_ar">ذلك\n(محايد)</string>
+    <string name="jenes_ar">That (neutral)</string>
 
 
-    <string name="added_to_favorites">تمت الإضافة إلى قائمة المفضلة</string>
-    <string name="removed_from_favorites">تمت الإزالة من قائمة المفضلة</string>
 
 
-    <string name="oppositequalitiesa1">الصفات المعاكسة A1</string>
-    <string name="conjunctions">أدوات الربط</string>
-    <string name="verbs_a1">افعال A1</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
 </resources>

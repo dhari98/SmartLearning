@@ -377,10 +377,16 @@ class MainActivity : AppCompatActivity() {
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////
-            55 -> {
+            13 -> {
                 Toast.makeText(this, getString(R.string.sub_item_2son), Toast.LENGTH_SHORT).show()
             }
-            56 -> {
+            14 -> {
+                Toast.makeText(this, getString(R.string.sub_item_2son), Toast.LENGTH_SHORT).show()
+            }
+            15 -> {
+                Toast.makeText(this, getString(R.string.sub_item_2son), Toast.LENGTH_SHORT).show()
+            }
+            16 -> {
                 Toast.makeText(this, getString(R.string.sub_item_2son), Toast.LENGTH_SHORT).show()
             }
         }
